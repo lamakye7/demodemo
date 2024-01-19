@@ -40,21 +40,19 @@ def main():
         outliers_kmeans = (distances > threshold_kmeans).astype(int)
 
         # Visualize the anomalies
-        plt.figure(figsize=(15, 5))
+        fig, axes = plt.subplots(1, 3, figsize=(15, 5))
 
-        plt.subplot(131)
-        plt.scatter(X[:, 0], X[:, 1], c=outliers_if, cmap='viridis')
-        plt.title('Isolation Forest Anomalies')
+        axes[0].scatter(X[:, 0], X[:, 1], c=outliers_if, cmap='viridis')
+        axes[0].set_title('Isolation Forest Anomalies')
 
-        plt.subplot(132)
-        plt.scatter(X[:, 0], X[:, 1], c=outliers_svm, cmap='viridis')
-        plt.title('One-Class SVM Anomalies')
+        axes[1].scatter(X[:, 0], X[:, 1], c=outliers_svm, cmap='viridis')
+        axes[1].set_title('One-Class SVM Anomalies')
 
-        plt.subplot(133)
-        plt.scatter(X[:, 0], X[:, 1], c=outliers_kmeans, cmap='viridis')
-        plt.title('K-Means Clustering Anomalies')
+        axes[2].scatter(X[:, 0], X[:, 1], c=outliers_kmeans, cmap='viridis')
+        axes[2].set_title('K-Means Clustering Anomalies')
 
-        st.pyplot()
+        # Pass the figure explicitly to st.pyplot()
+        st.pyplot(fig)
 
 def load_data(file):
     # Load data from CSV or Excel file
@@ -69,8 +67,6 @@ def load_data(file):
 
 if __name__ == "__main__":
     main()
-
-
 
    
 
